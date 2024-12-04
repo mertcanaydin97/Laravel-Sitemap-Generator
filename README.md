@@ -4,7 +4,16 @@ Simple laravel sitemap generation.
 
 ## Installation
 
-Create 'Helpers' directory inside 'app' folder.
+Create middleware file named 'SiteMapCrawler.php' inside app/Http/Middleware folder and register in 'app/Http/Kernel.php';
+
+```php
+ protected $middlewareAliases = [
+       ...
+        'sitemapcrawl' => \App\Http\Middleware\SiteMapCrawler::class,
+
+    ];
+```
+After that create 'Helpers' directory inside 'app' folder.
 Download and move 'SitemapHelper.php' to 'Helpers' folder.
 After copy open 'config/app' directory and add line below to 'aliases' array.
 
@@ -18,6 +27,7 @@ After copy open 'config/app' directory and add line below to 'aliases' array.
 
 ## Usage
 You can use this helper two different ways. First you need to import SitemapHelper in 'routes/web.php' and then add 'sitemapcrawl' middleware to routes that you want to add sitemap.
+Routes whitout params will be added to sitemap automaticly. All you need to do is register routes with dynamic params.
 Example
 ```php
 use App\Helpers\SitemapHelper;
